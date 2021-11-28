@@ -1,0 +1,47 @@
+﻿^ContentPage {
+    background-color: orchid;
+}
+
+image {
+    height: 100;
+    width: 60;
+}
+
+entry {
+    color: deeppink;
+    font-style: oblique;
+}
+
+label {
+    color: black;
+    font-size: medium;
+}
+
+#btnLogin {
+    background-color: #ffffff;
+    border-radius: 28;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #666666;
+    font-family: Arial;
+    font-size: 18;
+    padding: 16 31;
+    text-decoration: none;
+    text-shadow: 0 1 0 #ffffff;
+}
+
+
+#btnSignup {
+    background-color: #599bb3;
+    border-radius: 28;
+    border: 1px solid #29668f;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 17;
+    padding: 16 31;
+    text-decoration: none;
+    text-shadow: 0 1 0 #3d768a;
+}
