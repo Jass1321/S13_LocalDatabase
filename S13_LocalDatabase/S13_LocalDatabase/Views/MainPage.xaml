@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:ViewModel="clr-namespace:S13_LocalDatabase.ViewModels"
+    x:Class="S13_LocalDatabase.Views.MainPage"
+    Title="Playlist's Jassyra"
+    BackgroundColor="Thistle">
+
+    <ContentPage.BindingContext>
+        <ViewModel:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Margin="10,10,10,10">
+        <StackLayout
+            Orientation="Horizontal">
+            <Frame
+                CornerRadius="20" >
+                <Image
+                    Source="perfil13"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    />
+            </Frame>
+            <StackLayout
+            Orientation="Vertical">
+                <Label
+                Text="Jassyra Espinoza"
+                VerticalOptions="CenterAndExpand"
+                FontSize="Large"
+                FontAttributes="Italic"
+                Padding="20,40,0,0"/>
+                <Label
+                Text="jassyra13216@gmail.com"
+                VerticalOptions="CenterAndExpand"
+                FontSize="Large"
+                FontAttributes="Italic"
+                Padding="20,0,0,40"/>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout             
+            BackgroundColor="#CCD1D1"
+            Padding="5,5,5,5"
+            Margin="0,5,0,5">
+            <Label
+                Text="SELECCIONE LA OPCIÓN A REALIZAR"
+                TextColor="White"            
+                FontSize="Medium"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"/>
+        </StackLayout>
+
+        <ListView
+            ItemsSource="{Binding Menu}"
+            HasUnevenRows="True"            
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            CornerRadius="20"
+                            HasShadow="True"
+                            Margin="3">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectMenuItemCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Label 
+                                    Text="{Binding Id}"
+                                    IsVisible="False"/>
+                                <Label 
+                                    Text="{Binding Option}"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"/>
+                                <Image 
+                                    Source="ic_chevron_right"
+                                    HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentPage>
+

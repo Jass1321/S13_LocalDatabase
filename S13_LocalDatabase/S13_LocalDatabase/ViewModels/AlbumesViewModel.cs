@@ -1,97 +1,154 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using S13_LocalDatabase.Models;
-using S13_LocalDatabase.Services;
-using S13_LocalDatabase.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
+
+
+using S13_LocalDatabase.Models;
+using S13_LocalDatabase.Services;
+using S13_LocalDatabase.Views;
 
 
 namespace S13_LocalDatabase.ViewModels
 {
     class AlbumesViewModel : BaseViewModel
     {
-        #region Services        
-        private readonly AlbumService dataServiceAlbumes;
-        private readonly ArtistaService dataServiceArtistas;
+
+        #region Services
+        private readonly DBDataAccess<Artista> dataServiceArtistas;
+        private readonly DBDataAccess<Album> dataServiceAlbumes;
         #endregion Services
 
         #region Attributes
         private ObservableCollection<Artista> artistas;
         private ObservableCollection<Album> albumes;
+        private Artista selectedArtista;
+        private string titulo;
+        private double precio;
+        private int anio;
         #endregion Attributes
 
         #region Properties
-        public ObservableCollection<Album> Albumes
-        {
-            get { return this.albumes; }
-            set { SetValue(ref this.albumes, value); }
-        }
         public ObservableCollection<Artista> Artistas
         {
             get { return this.artistas; }
             set { SetValue(ref this.artistas, value); }
         }
+
+        public ObservableCollection<Album> Albumes
+        {
+            get { return this.albumes; }
+            set { SetValue(ref this.albumes, value); }
+        }
+
+        public Artista SelectedArtista
+        {
+            get { return this.selectedArtista; }
+            set { SetValue(ref this.selectedArtista, value); }
+        }
+
+        public string Titulo
+        {
+            get { return this.titulo; }
+            set { SetValue(ref this.titulo, value); }
+        }
+
+        public double Precio
+        {
+            get { return this.precio; }
+            set { SetValue(ref this.precio, value); }
+        }
+
+        public int Anio
+        {
+            get { return this.anio; }
+            set { SetValue(ref this.anio, value); }
+        }
         #endregion Properties
-
-        #region Command
-
-        public ICommand NeWAlbumCommand
-        {
-            get
-            {
-                return new Command(NeWAlbum);
-            }
-        }
-
-        public ICommand LoadbumesCommand
-        {
-            get
-            {
-                return new Command(LoadAlbumes);
-            }
-        }
-        #endregion
 
         #region Constructor
         public AlbumesViewModel()
         {
-            this.dataServiceArtistas = new ArtistaService();
-            this.dataServiceAlbumes = new AlbumService();
+            this.dataServiceArtistas = new DBDataAccess<Artista>();
+            this.dataServiceAlbumes = new DBDataAccess<Album>();
+
             this.CreateArtistas();
+
+            this.LoadArtistas();
             this.LoadAlbumes();
+
+            this.Anio = DateTime.Now.Year;
         }
         #endregion Constructor
 
-        #region Methods
-
-        private void NeWAlbum()
+        #region Commands
+        public ICommand CreateCommand
         {
-            Application.Current.MainPage.Navigation.PushAsync(new AlbumPage());
+            get
+            {
+                return new Command(async () =>
+                {
+                    var newAlbum = new Album()
+                    {
+                        ArtistaID = this.SelectedArtista.ArtistaID,
+                        Titulo = this.Titulo,
+                        Precio = this.Precio,
+                        Anio = this.Anio
+                    };
+
+                    if (newAlbum != null)
+                    {
+                        if (this.dataServiceAlbumes.Create(newAlbum))
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Operación Exitosa",
+                                                                            $"Albúm del artista: {this.SelectedArtista.Nombre} " +
+                                                                            $"creado correctamente en la base de datos",
+                                                                            "Ok");
+
+                            this.SelectedArtista = null;
+                            this.Titulo = string.Empty;
+                            this.Precio = 0;
+                            this.Anio = DateTime.Now.Year;
+                        }
+
+                        else
+                            await Application.Current.MainPage.DisplayAlert("Operación Fallida",
+                                                                            $"Error al crear el Albúm en la base de datos",
+                                                                            "Ok");
+                    }
+                });
+            }
         }
+        #endregion Commands
+
+        #region Methods
+        private void LoadArtistas()
+        {
+            var artistasDB = this.dataServiceArtistas.Get().ToList() as List<Artista>;
+            this.Artistas = new ObservableCollection<Artista>(artistasDB);
+        }
+
         private void LoadAlbumes()
         {
-            var albumesDB = this.dataServiceAlbumes.Get();
+            var albumesDB = this.dataServiceAlbumes.Get(null, null, "Artista").ToList() as List<Album>;
             this.Albumes = new ObservableCollection<Album>(albumesDB);
-            
-            var artistasDB = this.dataServiceArtistas.Get();
-            this.Artistas = new ObservableCollection<Artista>(artistasDB); 
         }
 
         private void CreateArtistas()
         {
             var artistas = new List<Artista>()
             {
-                new Artista { Nombre = "Niall Horan" },
-                new Artista { Nombre = "Harry Style" },
+                new Artista { Nombre = "Harry Stykes" },
                 new Artista { Nombre = "Louis Tomlinson" },
                 new Artista { Nombre = "Liam Payne" },
-                new Artista { Nombre = "Zayn Malik" }
+                new Artista { Nombre = "Zayn Malik" },
+                new Artista { Nombre = "Niall Horan" }
             };
 
-            //this.dataServiceArtistas.CreateList(artistas);
+            //this.dataServiceArtistas.SaveList(artistas);
         }
         #endregion Methods
 

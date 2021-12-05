@@ -14,7 +14,7 @@ namespace S13_LocalDatabase
         {
             InitializeComponent();
             GetContext().Database.EnsureCreated();
-            MainPage = new NavigationPage(new AlbumesPage());
+            MainPage = new NavigationPage(new Views.MainPage());
         }
 
         // Método para obtener el contexto cuando se inicia la aplicación

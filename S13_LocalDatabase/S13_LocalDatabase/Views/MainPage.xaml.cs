@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace S13_LocalDatabase.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ArtistaPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public ArtistaPage()
+        public MainPage()
         {
             InitializeComponent();
         }

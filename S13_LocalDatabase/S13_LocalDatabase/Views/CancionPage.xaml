@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="S13_LocalDatabase.Views.AlbumPage"
-            
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             x:Class="S13_LocalDatabase.Views.CancionPage"
+             
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:ViewModel="clr-namespace:S13_LocalDatabase.ViewModels"
-             Title="Crear nuevo Album"
-             >
+             Title="Crear nueva Canción">
+
     <ContentPage.BindingContext>
-        <ViewModel:AlbumesViewModel/>
+        <ViewModel:CancionViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -25,28 +25,35 @@
             <Label 
                 Text="Artista"/>
             <Picker
-                Title="Selecciona un Artista"
-                ItemsSource="{Binding Artistas}"
-                ItemDisplayBinding="{Binding Nombre}"
-                SelectedItem="{Binding SelectedArtista}"/>
+                Title="Selecciona un Album"
+                ItemsSource="{Binding Albumes}"
+                ItemDisplayBinding="{Binding Titulo}"
+                SelectedItem="{Binding SelectedAlbum}"/>
 
             <Label
-                Text="Título"/>
+                Text="Cancion"/>
             <Entry 
-                Placeholder="Título"
-                Text="{Binding Titulo}"/>
+                Placeholder="Nombre"
+                Text="{Binding Name}"/>
 
             <Label
-                Text="Precio"/>
+                Text="Tiempo"/>
             <Entry 
-                Placeholder="Precio"
-                Text="{Binding Precio}"/>
+                Placeholder="0:00"
+                Text="{Binding Time}"/>
 
             <Label
-                Text="Año"/>
+                Text="Fecha de Estreno"/>
             <Entry 
-                Placeholder="Año"
-                Text="{Binding Anio}"/>
+                Text="{Binding FechaEstreno}"/>
+
+            <Label
+                Text="¿Like?"/>
+
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Si" Padding="10,10,10,10" /> <CheckBox BindingContext="Yes"  />
+                <Label Text="No"/> <CheckBox BindingContext="No"  />
+            </StackLayout>
 
             <Button
                 Text="Guardar"

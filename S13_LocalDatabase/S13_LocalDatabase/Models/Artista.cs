@@ -8,6 +8,6 @@ namespace S13_LocalDatabase.Models
     {
         public int ArtistaID { get; set; }
         public string Nombre { get; set; }
-
+     
     }
 }

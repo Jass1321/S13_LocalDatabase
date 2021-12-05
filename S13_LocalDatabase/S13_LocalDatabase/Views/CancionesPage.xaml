@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="S13_LocalDatabase.Views.AlbumesPage"
-             Title="Album's 1D"
+             x:Class="S13_LocalDatabase.Views.CancionesPage"
+            
+             Title="Rolitas"
              BackgroundColor="Tan"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             xmlns:ViewModel="clr-namespace:S13_LocalDatabase.ViewModels"
-            >
-
-    <ContentPage.Resources>
-        <StyleSheetExtension Source="/CSS/Playlist.css"></StyleSheetExtension>
-    </ContentPage.Resources>
+             xmlns:ViewModel="clr-namespace:S13_LocalDatabase.ViewModels">
+  
     <ContentPage.BindingContext>
-        <ViewModel:AlbumesViewModel/>
+        <ViewModel:CancionViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -27,7 +24,7 @@
             </StackLayout.Padding>
 
             <ListView
-            ItemsSource="{Binding Albumes}"
+            ItemsSource="{Binding Canciones}"
             HasUnevenRows="True"            
             SeparatorVisibility="None">
                 <ListView.ItemTemplate>
@@ -50,46 +47,46 @@
                                         <Label 
                                         Grid.Row="0"
                                         Grid.Column="0"
-                                        Text="Artista: "
+                                        Text="Album: "
                                         FontAttributes="Bold"/>
 
                                         <Label
                                         Grid.Row="0"
                                         Grid.Column="1"
-                                        Text="{Binding Artista.Nombre}"/>
+                                        Text="{Binding Album.Titulo}"/>
 
                                         <Label
                                         Grid.Row="1"
                                         Grid.Column="0"
-                                        Text="Título: "
+                                        Text="Nombre: "
                                         FontAttributes="Bold"/>
 
                                         <Label 
                                         Grid.Row="1"
                                         Grid.Column="1"
-                                        Text="{Binding Titulo}"/>
+                                        Text="{Binding Nombre}"/>
 
                                         <Label
                                         Grid.Row="2"
                                         Grid.Column="0"
-                                        Text="Precio: "
+                                        Text="Duracion: "
                                         FontAttributes="Bold"/>
 
                                         <Label 
                                         Grid.Row="2"
                                         Grid.Column="1"
-                                        Text="{Binding Precio}"/>
+                                        Text="{Binding Tiempo}"/>
 
                                         <Label
                                         Grid.Row="3"
                                         Grid.Column="0"
-                                        Text="Año: "
+                                        Text="Año de Estreno: "
                                         FontAttributes="Bold"/>
 
                                         <Label
                                         Grid.Row="3"
                                         Grid.Column="1"
-                                        Text="{Binding Anio}"/>
+                                        Text="{Binding FechaEstreno}"/>
                                     </Grid>
                                 </StackLayout>
                             </Frame>

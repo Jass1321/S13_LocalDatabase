@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace S13_LocalDatabase
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace S13_LocalDatabase.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CancionesPage : ContentPage
     {
-        public MainPage()
+        public CancionesPage()
         {
             InitializeComponent();
         }
