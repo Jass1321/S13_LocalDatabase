@@ -16,7 +16,7 @@ namespace S13_LocalDatabase.ViewModels
 {
     class AlbumesViewModel : BaseViewModel
     {
-
+        //Usando inyeccion de dependencias
         #region Services
         private readonly DBDataAccess<Artista> dataServiceArtistas;
         private readonly DBDataAccess<Album> dataServiceAlbumes;
@@ -99,26 +99,33 @@ namespace S13_LocalDatabase.ViewModels
                         Anio = this.Anio
                     };
 
-                    if (newAlbum != null)
+                    var album = this.dataServiceAlbumes.Get(x => x.Titulo == newAlbum.Titulo).FirstOrDefault();
+                   
+
+                    if (album == null)
                     {
-                        if (this.dataServiceAlbumes.Create(newAlbum))
+                        if (newAlbum != null)
                         {
-                            await Application.Current.MainPage.DisplayAlert("Operación Exitosa",
-                                                                            $"Albúm del artista: {this.SelectedArtista.Nombre} " +
-                                                                            $"creado correctamente en la base de datos",
-                                                                            "Ok");
+                            if (this.dataServiceAlbumes.Create(newAlbum))
+                            {
+                                await Application.Current.MainPage.DisplayAlert("Operación Exitosa",
+                                                                                $"Albúm del artista: {this.SelectedArtista.Nombre} " +
+                                                                                $"creado correctamente en la base de datos",
+                                                                                "Ok");
 
-                            this.SelectedArtista = null;
-                            this.Titulo = string.Empty;
-                            this.Precio = 0;
-                            this.Anio = DateTime.Now.Year;
-                        }
-
-                        else
-                            await Application.Current.MainPage.DisplayAlert("Operación Fallida",
-                                                                            $"Error al crear el Albúm en la base de datos",
-                                                                            "Ok");
-                    }
+                                this.SelectedArtista = null;
+                                this.Titulo = string.Empty;
+                                this.Precio = 0;
+                                this.Anio = DateTime.Now.Year;
+                            }
+                            else
+                            {
+                                await Application.Current.MainPage.DisplayAlert("Operación Fallida",
+                                                                                 $"Error al crear el Albúm en la base de datos",
+                                                                                 "Ok");
+                            }
+                        };
+                    };
                 });
             }
         }
@@ -129,23 +136,25 @@ namespace S13_LocalDatabase.ViewModels
         {
             var artistasDB = this.dataServiceArtistas.Get().ToList() as List<Artista>;
             this.Artistas = new ObservableCollection<Artista>(artistasDB);
+            
         }
 
         private void LoadAlbumes()
         {
             var albumesDB = this.dataServiceAlbumes.Get(null, null, "Artista").ToList() as List<Album>;
             this.Albumes = new ObservableCollection<Album>(albumesDB);
+           
         }
 
         private void CreateArtistas()
         {
             var artistas = new List<Artista>()
             {
-                new Artista { Nombre = "Harry Stykes" },
-                new Artista { Nombre = "Louis Tomlinson" },
-                new Artista { Nombre = "Liam Payne" },
-                new Artista { Nombre = "Zayn Malik" },
-                new Artista { Nombre = "Niall Horan" }
+                new Artista { Nombre = "Harry Stykes2" },
+                new Artista { Nombre = "Louis Tomlinson2" },
+                new Artista { Nombre = "Liam Payne2" },
+                new Artista { Nombre = "Zayn Malik2" },
+                new Artista { Nombre = "Niall Horan2" }
             };
 
             //this.dataServiceArtistas.SaveList(artistas);

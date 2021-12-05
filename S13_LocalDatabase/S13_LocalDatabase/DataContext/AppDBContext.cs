@@ -18,8 +18,6 @@ namespace S13_LocalDatabase.DataContext
         public DbSet<Artista> Artistas { get; set; }
         public DbSet<Album> Albumes { get; set; }
 
-        public DbSet<Album> Canciones { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

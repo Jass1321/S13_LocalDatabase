@@ -18,13 +18,18 @@
         <StackLayout
             Orientation="Horizontal">
             <Frame
-                CornerRadius="20" >
+                CornerRadius="20" 
+                WidthRequest="50"
+                HeightRequest="50"
+                HorizontalOptions="Start">
+
                 <Image
                     Source="perfil13"
-                    WidthRequest="80"
-                    HeightRequest="80"
+                    WidthRequest="200"
+                    HeightRequest="200"
                     />
             </Frame>
+
             <StackLayout
             Orientation="Vertical">
                 <Label

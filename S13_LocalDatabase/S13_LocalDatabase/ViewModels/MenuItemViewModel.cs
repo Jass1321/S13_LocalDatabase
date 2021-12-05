@@ -31,12 +31,8 @@ namespace S13_LocalDatabase.ViewModels
         {
             if (this.Id == 1)
                 Application.Current.MainPage.Navigation.PushAsync(new AlbumPage());
-            if (this.Id == 2)
-                Application.Current.MainPage.Navigation.PushAsync(new AlbumesPage());
-            if (this.Id == 3)
-                Application.Current.MainPage.Navigation.PushAsync(new CancionPage());
             else
-                Application.Current.MainPage.Navigation.PushAsync(new CancionesPage());
+                Application.Current.MainPage.Navigation.PushAsync(new AlbumesPage());
         }
         #endregion Methods
 

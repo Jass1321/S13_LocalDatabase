@@ -27,8 +27,8 @@ namespace S13_LocalDatabase.ViewModels
         public MainViewModel()
         {
             this.LoadMenu();
-            this.SaveArtistasList();
-            this.SaveAlbumList();
+
+            //this.SaveArtistasList();
         }
         #endregion Constructor
 
@@ -38,15 +38,12 @@ namespace S13_LocalDatabase.ViewModels
             this.Menu = new ObservableCollection<MenuItemViewModel>();
 
             this.Menu.Clear();
-            this.Menu.Add(new MenuItemViewModel { Id = 1, Option = "Crear Album" });
-            this.Menu.Add(new MenuItemViewModel { Id = 2, Option = "Lista de Albums" });
-            this.Menu.Add(new MenuItemViewModel { Id = 3, Option = "Crear Cancion" });
-            this.Menu.Add(new MenuItemViewModel { Id = 4, Option = "Lista de Canciones" });
+            this.Menu.Add(new MenuItemViewModel { Id = 1, Option = "Crear" });
+            this.Menu.Add(new MenuItemViewModel { Id = 2, Option = "Lista de Registros" });
         }
         #endregion Methods
 
         DBDataAccess<Artista> dataService = new DBDataAccess<Artista>();
-        DBDataAccess<Album> dataServiceAlbum = new DBDataAccess<Album>();
         private void SaveArtistasList()
         {
             var artistas = new List<Artista>()
@@ -58,23 +55,5 @@ namespace S13_LocalDatabase.ViewModels
 
             dataService.SaveList(artistas);
         }
-        private void SaveAlbumList()
-        {
-            
-            var albumes = new List<Album>()
-            {
-                new Album { Titulo = "Mind of Mine" },
-                new Album { Titulo = "Icarus Falls" },
-                new Album { Titulo = "Flicker" },
-                new Album { Titulo = "LP1" },
-                new Album { Titulo = "Walls" },
-                new Album { Titulo = "Midnight Memories" },
-                new Album { Titulo = "Up All Night" }
-            };
-
-            this.dataServiceAlbum.SaveList(albumes);
-        }
-
-
     }
 }

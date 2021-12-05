@@ -9,10 +9,7 @@
              mc:Ignorable="d"
              xmlns:ViewModel="clr-namespace:S13_LocalDatabase.ViewModels"
             >
-
-    <ContentPage.Resources>
-        <StyleSheetExtension Source="/CSS/Playlist.css"></StyleSheetExtension>
-    </ContentPage.Resources>
+    
     <ContentPage.BindingContext>
         <ViewModel:AlbumesViewModel/>
     </ContentPage.BindingContext>

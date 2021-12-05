@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using S13_LocalDatabase.DataContext;
 
+
 namespace S13_LocalDatabase.Services
 {
     class DBDataAccess<T> where T : class
